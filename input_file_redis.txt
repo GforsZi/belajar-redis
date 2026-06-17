@@ -1,0 +1,31 @@
+setex name 30 "gfors"
+setex email 30 "admin@example.com"
+setex role 30 "admin"
+
+ttl name
+
+set current "learning redis"
+mset time "12:00 AM" date "2027-8-10"
+expire current 10
+
+keys *
+get current
+mget time date
+
+incr counter
+decr counter
+
+incrby counter 3
+decrby counter 3
+
+multi
+set apple "true apple"
+set banan "true banana"
+discard
+
+multi
+set car "toyota"
+set motorsycle "honda"
+exec
+
+flushdb
