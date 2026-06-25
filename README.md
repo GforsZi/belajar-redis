@@ -1,66 +1,71 @@
 # Redis Learning Notes
 
-Selamat datang di repositori dokumentasi pembelajaran **Redis** saya. Repositori ini berisi catatan mengenai dasar-dasar perintah dan administrasi Redis yang telah saya pelajari.
+Welcome to my **Redis** learning documentation repository. This repository contains notes and references regarding Redis commands and administration basics I've been studying.
 
 ---
 
-## 📖 Apa itu Redis?
+## 📖 What is Redis?
 
-**Redis** (*Remote Dictionary Server*) adalah sistem penyimpanan struktur data *in-memory* yang sangat cepat, bersifat sumber terbuka (*open source*), dan sering digunakan sebagai:
+**Redis** (*Remote Dictionary Server*) is an extremely fast, open-source, in-memory data structure store. It is widely used as:
 - **Database**
 - **Cache**
 - **Message Broker**
 
-Redis mampu memberikan performa tinggi karena menyimpan data langsung di memori (RAM), menjadikannya solusi ideal untuk aplikasi yang membutuhkan latensi rendah.
+Redis is highly performant due to its in-memory nature, making it an ideal solution for applications requiring low latency.
 
 ---
 
-## 🛠️ Daftar Perintah yang Dipelajari
+## 🛠️ Redis Administration & Connection Commands
 
-Berikut adalah daftar perintah yang telah saya pelajari untuk administrasi, pemantauan, dan manajemen koneksi server Redis.
+Below are the commands I've learned for managing the Redis server, monitoring, and client connections.
 
-### 1. Koneksi & Operasi Massal
-| Command | Deskripsi |
+### 1. Connection & Bulk Operations
+| Command | Description |
 | :--- | :--- |
-| `redis-cli -h localhost -p 6379` | Menghubungkan ke server Redis lokal. |
-| `redis-cli -h localhost -p 6379 -n 0 --pipe < input_file.txt` | Mengirim perintah secara massal dari file via *pipe*. |
-| `select 0` | Berpindah atau memilih basis data dengan indeks tertentu. |
+| `redis-cli -h localhost -p 6379` | Connects to the local Redis server. |
+| `redis-cli -h localhost -p 6379 -n 0 --pipe < input_file.txt` | Executes commands in bulk from a file via pipe. |
+| `select 0` | Selects the Redis database by its index. |
 
-### 2. Administrasi & Pemantauan
-| Command | Deskripsi |
+### 2. Administration & Monitoring
+| Command | Description |
 | :--- | :--- |
-| `monitor` | Memantau seluruh perintah yang dieksekusi server secara *real-time*. |
-| `info` | Menampilkan statistik dan informasi umum tentang server. |
-| `config get` | Mengambil konfigurasi server (contoh: `config get *`). |
+| `monitor` | Real-time monitoring of all commands executed on the server. |
+| `info` | Displays server statistics and general information. |
+| `config get` | Retrieves server configuration settings (e.g., `config get *`). |
 
-### 3. Manajemen Klien (Client Management)
-| Command | Deskripsi |
+### 3. Client Management
+| Command | Description |
 | :--- | :--- |
-| `client list` | Menampilkan daftar klien yang sedang terhubung ke server. |
-| `client id` | Menampilkan ID unik dari koneksi klien saat ini. |
-| `client kill <ip:port>` | Memutuskan paksa koneksi klien tertentu. |
+| `client list` | Lists all clients currently connected to the server. |
+| `client id` | Returns the unique ID of the current client connection. |
+| `client kill <ip:port>` | Forcefully terminates a specific client connection. |
 
 ---
 
-## 🚀 Eksplorasi Perintah Redis (Input File)
+## 🚀 Redis Query Exploration (Input File)
 
-Tabel berikut menjelaskan perintah yang terdapat dalam `input_file_redis.txt` yang saya gunakan dalam pembelajaran:
+This table provides a breakdown of the queries used in `input_file_redis.txt` during my learning process:
 
-| Line | Command | Penjelasan |
+| Line | Command | Description |
 | :--- | :--- | :--- |
-| 1-3 | `setex key 30 val` | Mengatur key dengan nilai dan durasi (TTL) 30 detik. |
-| 5 | `ttl key` | Melihat sisa waktu hidup (*time to live*) dari sebuah key. |
-| 7 | `set key val` | Mengatur nilai sebuah key. |
-| 8 | `mset k1 v1 k2 v2` | Mengatur banyak key sekaligus. |
-| 9 | `expire key 10` | Mengatur durasi (TTL) 10 detik untuk key tertentu. |
-| 11 | `keys *` | Menampilkan seluruh key yang ada di database. |
-| 12 | `get key` | Mengambil nilai dari sebuah key. |
-| 13 | `mget k1 k2` | Mengambil nilai dari banyak key sekaligus. |
-| 15-16 | `incr` / `decr` | Menambah/mengurangi nilai numerik sebuah key sebesar 1. |
-| 18-19 | `incrby` / `decrby` | Menambah/mengurangi nilai numerik sebuah key sebesar N. |
-| 21-24 | `multi` ... `discard` | Memulai transaksi dan membatalkannya. |
-| 26-29 | `multi` ... `exec` | Memulai transaksi dan mengeksekusinya secara atomik. |
-| 31 | `flushdb` | Menghapus seluruh data di database saat ini. |
+| 1-3 | `setex key 30 val` | Sets a key with a value and a 30-second TTL (Time-to-Live). |
+| 5 | `ttl key` | Gets the remaining time-to-live of a key. |
+| 7 | `set key val` | Sets the value of a key. |
+| 8 | `mset k1 v1 k2 v2` | Sets multiple keys simultaneously. |
+| 9 | `expire key 10` | Sets a 10-second TTL for a specific key. |
+| 11 | `keys *` | Lists all keys in the current database. |
+| 12 | `get key` | Retrieves the value of a key. |
+| 13 | `mget k1 k2` | Retrieves values for multiple keys. |
+| 15-16 | `incr` / `decr` | Increments/decrements a numeric key's value by 1. |
+| 18-19 | `incrby` / `decrby` | Increments/decrements a numeric key's value by N. |
+| 21-24 | `multi` ... `discard` | Initiates a transaction and discards it. |
+| 26-29 | `multi` ... `exec` | Initiates a transaction and executes it atomically. |
+| 31 | `flushdb` | Deletes all data in the current database. |
 
 ---
 
+## 📝 Note
+This documentation serves as a personal reference guide. Ensure your Redis server is running before executing any of these commands.
+
+---
+*Happy Learning! 🚀*
